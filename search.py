@@ -99,14 +99,16 @@ def graph_search(problem, fringe):
     If two paths reach a state, only use the best one. [Fig. 3.18]"""
     closed = {}
     fringe.append(Node(problem.initial))
+    count=0
     while fringe:
         node = fringe.pop()
         if problem.goal_test(node.state):
-            return node
+            return (node, count)
         if node.state not in closed:
             closed[node.state] = True
             fringe.extend(node.expand(problem))
-    return None
+            count=count+1
+    return (None, count)
 
 
 def breadth_first_graph_search(problem):
@@ -118,8 +120,8 @@ def depth_first_graph_search(problem):
     """Search the deepest nodes in the search tree first. [p 74]"""
     return graph_search(problem, Stack())
 
-def branch_and_bound(problem):
-    """"""
+def branch_and_bound_graph_search(problem):
+    """Search the nodes with the lowest path_cost first"""
     return graph_search(problem, CostOrderQueue())
     
 

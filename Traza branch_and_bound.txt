@@ -1,0 +1,26 @@
+
+Traza de busqueda por ramificación y acotación desde A a B.
+En la lista abierta no se considera aquellos estados que ya forman parte de la lista cerrada.
+
+
+LISTA CERRADA							LISTA ABIERTA
+{}								{A(0)}
+{A}								{S(140),T(118),Z(75)}
+{A,Z}								{O(146),S(140),T(118)}
+{A,Z,T}								{L(229),O(146),S(140)}
+{A,Z,T,S}							{O(291),F(239),L(229),R(220),O(146)}
+{A,Z,T,S,O}							{F(239),L(229),R(220)}
+{A,Z,T,S,O,R}							{C(366),P(317),F(239),L(229)}
+{A,Z,T,S,O,R,L}							{C(366),P(317),M(299),F(239)}
+{A,Z,T,S,O,R,L,F}						{B(450),C(366),P(317),M(299)}
+{A,Z,T,S,O,R,L,F,M}						{B(450),D(374),C(366),P(317)}
+{A,Z,T,S,O,R,L,F,M,P}						{C(452),B(450),B(418),D(374),C(366)}
+{A,Z,T,S,O,R,L,F,M,P,C}						{D(572),B(450),B(418),D(374)}
+{A,Z,T,S,O,R,L,F,M,P,C,D}					{B(450),B(418)}
+B(418):GOAL							{B(450)}
+
+
+SUMIT KUMAR JETHANI JETHANI
+CARLOS SÁNCHEZ VELÁZQUEZ
+
+
