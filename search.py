@@ -107,6 +107,7 @@ def graph_search(problem, fringe):
         if node.state not in closed:
             closed[node.state] = True
             fringe.extend(node.expand(problem))
+            print(fringe)
             count=count+1
     return (None, count)
 
@@ -123,6 +124,11 @@ def depth_first_graph_search(problem):
 def branch_and_bound_graph_search(problem):
     """Search the nodes with the lowest path_cost first"""
     return graph_search(problem, CostOrderQueue())
+
+def branch_and_bound_subestimation_graph_search(problem):
+    """Search the nodes with the lowest path_cost + 
+       Heuristic (straight-line distance) first """
+    return graph_search(problem, HeuristicOrderQueue(problem))
     
 
 

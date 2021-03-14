@@ -1,0 +1,25 @@
+
+Traza de busqueda por ramificación y acotación con subestimación desde A a B.
+
+Además de utilizar el coste acumulado de un camino desde el estado inicial hasta
+un cierto estado del grafo, se utiliza una estimación heurística hasta el estado
+final para ordenar la lista abierta. Como heurística se utilizará la distancia en
+línea recta entre cada estado y el estado final.
+
+Coste estimado: f(n) = g(n) + h(n)
+
+En la lista abierta no se considera aquellos estados que ya forman parte de la lista cerrada.
+
+
+LISTA CERRADA							LISTA ABIERTA (con f(n))
+{}								{A()}
+{A}								{T(),Z(),S()}
+{A,S}								{O(),T(),Z(),R(),F()}
+{A,S,F}								{O(),B(),T(),Z(),R()}
+{A,S,F,R}							{O(),C(),B(),T(),Z(),P()}
+{A,S,F,R,P}							{O(),C(),C(),B(),T(),Z(),B()}
+B():GOAL							{O(),C(),C(),B(),T(),Z()}
+
+
+SUMIT KUMAR JETHANI JETHANI
+CARLOS SÁNCHEZ VELÁZQUEZ

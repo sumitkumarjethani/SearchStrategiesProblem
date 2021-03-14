@@ -4,14 +4,17 @@ import search
 
 ab = search.GPSProblem('A', 'B'
                        , search.romania)
-nodo, cuenta=search.breadth_first_graph_search(ab)
-print("Camino recorrido", nodo.path(), "Nodos expandidos:", cuenta)
+node,count=search.breadth_first_graph_search(ab)
+print("Camino recorrido anchura", node.path(), "Nodos expandidos:", count)
 print("**************************")
-s2=search.depth_first_graph_search(ab)
-print("Camino recorrido", nodo.path(), "Nodos expandidos:", cuenta)
+node,count=search.depth_first_graph_search(ab)
+print("Camino recorrido profundidad", node.path(), "Nodos expandidos:", count)
 print("**************************")
-s3=search.branch_and_bound_graph_search(ab)
-print("Camino recorrido", nodo.path(), "Nodos expandidos:", cuenta)
+node,count=search.branch_and_bound_graph_search(ab)
+print("Camino recorrido ramificación y acotación", node.path(), "Nodos expandidos:", count)
+print("**************************")
+node,count=search.branch_and_bound_subestimation_graph_search(ab)
+print("Camino recorrido ramificación y acotación con subestimación", node.path(), "Nodos expandidos:", count)
 
 
 # Result:

@@ -1,4 +1,4 @@
-
+import math
 #______________________________________________________________________________
 # Simple Data Structures: infinity, Dict, Struct
 
@@ -544,14 +544,13 @@ class FIFOQueue(Queue):
         return e
 
 class CostOrderQueue(Queue):
-    """A First-In-First-Out By Cost Queue."""
+    """A Cost Order Queue."""
     
     def __init__(self):
         self.A = []
-        self.start = 0
     
     def __len__(self):
-        return len(self.A) - self.start
+        return len(self.A)
     
     def append(self, item):
         if self.__len__() == 0 or item.path_cost <= self.A[-1].path_cost:
@@ -565,13 +564,42 @@ class CostOrderQueue(Queue):
     def extend(self, items):
         for item in items:
             self.append(item)
-    
-    
+        
     def pop(self):
         return self.A.pop()
+    
+    def __repr__(self):
+        return str(self.A)
         
+class HeuristicOrderQueue(Queue):
+    """A Cost + Heuristic (straight-line distance) Queue."""
+    
+    def __init__(self,problem):
+        self.A = []
+        self.problem = problem
+    
+    def __len__(self):
+        return len(self.A)
+    
+    def append(self, item):
+        estimatedCost = item.path_cost + self.problem.h(item) 
+        if self.__len__() == 0 or estimatedCost <= (self.A[-1].path_cost + self.problem.h(self.A[-1])):
+            self.A.append(item)
+        else:
+            for i in range(self.__len__()):
+                if estimatedCost > (self.A[i].path_cost + self.problem.h(self.A[i])):
+                    self.A.insert(i,item)
+                    break
+    
+    def extend(self, items):
+        for item in items:
+            self.append(item)
+        
+    def pop(self):
+        return self.A.pop()
 
-
+    def __repr__(self):
+        return str(self.A)
 
 
 
