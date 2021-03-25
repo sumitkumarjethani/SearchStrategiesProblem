@@ -354,6 +354,10 @@ def turn_right(orientation):
 def turn_left(orientation):
     return orientations[(orientations.index(orientation) + 1) % len(orientations)]
 
+def distance_manhattan(node, goal):
+    "The manhattan distance between a node and goal."
+    return abs(node[0]-goal[0])+abs(node[1]-goal[1])
+
 
 def distance(xxx_todo_changeme, xxx_todo_changeme1):
     "The distance between two (x, y) points."
@@ -582,7 +586,13 @@ class HeuristicOrderQueue(Queue):
         return len(self.A)
     
     def append(self, item):
-        estimatedCost = item.path_cost + self.problem.h(item) 
+        """
+            Para emplear la distancia manhattan llamar
+            al metodo h1 de la clase GPSProblem. 
+        """
+        estimatedCost = item.path_cost + self.problem.h(item)
+        #print("Coste Nodo",item.state,item.path_cost)
+        #print("Heuristica Nodo",item.state,self.problem.h(item))
         if self.__len__() == 0 or estimatedCost <= (self.A[-1].path_cost + self.problem.h(self.A[-1])):
             self.A.append(item)
         else:
@@ -598,11 +608,10 @@ class HeuristicOrderQueue(Queue):
     def pop(self):
         return self.A.pop()
 
+"""
     def __repr__(self):
         return str(self.A)
-
-
-
+"""
 
 ## Fig: The idea is we can define things like Fig[3,10] later.
 ## Alas, it is Fig[3,10] not Fig[3.10], because that would be the same as Fig[3.1]

@@ -107,7 +107,7 @@ def graph_search(problem, fringe):
         if node.state not in closed:
             closed[node.state] = True
             fringe.extend(node.expand(problem))
-            print(fringe)
+            #print(fringe)
             count=count+1
     return (None, count)
 
@@ -273,5 +273,13 @@ class GPSProblem(Problem):
         locs = getattr(self.graph, 'locations', None)
         if locs:
             return int(distance(locs[node.state], locs[self.goal]))
+        else:
+            return infinity
+    
+    def h1(self, node):
+        """h1 function is manhattan distance from a node's state to goal."""
+        locs = getattr(self.graph, 'locations', None)
+        if locs:
+            return distance_manhattan(locs[node.state], locs[self.goal])
         else:
             return infinity
